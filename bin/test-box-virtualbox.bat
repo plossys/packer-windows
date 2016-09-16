@@ -1,4 +1,4 @@
-rem 
+rem
 rem bin\test-box-virtualbox.bat ubuntu1204_virtualbox.box ubuntu1204
 set quick=0
 
@@ -21,7 +21,7 @@ if %quick%==1 goto :do_test
 rem vagrant plugin install vagrant-serverspec
 
 vagrant box remove %box_name% --provider=%vagrant_provider%
-vagrant box add %box_name% %box_path%
+vagrant box add %box_name% %box_path% -f
 if ERRORLEVEL 1 set result=%ERRORLEVEL%
 if ERRORLEVEL 1 goto :done
 

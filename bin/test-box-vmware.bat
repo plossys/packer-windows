@@ -1,4 +1,4 @@
-rem 
+rem
 rem bin\test-box-vmware.bat ubuntu1204_vmware.box ubuntu1204
 set quick=0
 
@@ -29,7 +29,7 @@ if exist c:\vagrant\resources\license.lic (
   )
 )
 vagrant box remove %box_name% --provider=%box_provider%
-vagrant box add %box_name% %box_path%
+vagrant box add %box_name% %box_path% -f
 if ERRORLEVEL 1 set result=%ERRORLEVEL%
 if ERRORLEVEL 1 goto :done
 

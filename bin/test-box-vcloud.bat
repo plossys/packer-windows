@@ -1,4 +1,4 @@
-rem 
+rem
 rem bin\test-box-vcloud.bat ubuntu1204_vcloud.box ubuntu1204
 set quick=0
 set debug=0
@@ -36,7 +36,7 @@ rem vagrant plugin install vagrant-%box_provider%
 rem vagrant plugin install vagrant-serverspec
 
 vagrant box remove %box_name% --provider=%vagrant_provider%
-vagrant box add %box_name% %box_path%
+vagrant box add %box_name% %box_path% -f
 if ERRORLEVEL 1 set result=%ERRORLEVEL%
 if ERRORLEVEL 1 goto :done
 
