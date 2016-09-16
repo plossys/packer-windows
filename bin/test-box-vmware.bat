@@ -84,4 +84,4 @@ echo --format documentation >>.rspec
 exit /b
 
 :done
-exit %result%
+exit /b %result%

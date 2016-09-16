@@ -52,6 +52,7 @@ if "%VAGRANT_HOME%x"=="x" set VAGRANT_HOME=%USERPROFILE%\.vagrant.d
 if exist c:\vagrant\resources\test-box-vcloud-credentials.bat call c:\vagrant\resources\test-box-vcloud-credentials.bat
 
 echo Uploading %box_name%.ovf to vCloud %vcloud_hostname% / %vcloud_org% / %vcloud_catalog% / %box_name%
+where /q ovftool || set PATH=%PATH%;c:\Program Files (x86)\VMware\VMware Workstation\OVFTool
 @ovftool --acceptAllEulas --vCloudTemplate --overwrite %VAGRANT_HOME%\boxes\%box_name%\0\%box_provider%\%box_name%.ovf "vcloud://%vcloud_username%:%vcloud_password%@%vcloud_hostname%:443?org=%vcloud_org%&vappTemplate=%box_name%&catalog=%vcloud_catalog%&vdc=%vcloud_vdc%"
 if ERRORLEVEL 1 goto :first_upload
 goto :test_vagrant_box
@@ -129,4 +130,4 @@ echo --format documentation >>.rspec
 exit /b
 
 :done
-exit %result%
+exit /b %result%
