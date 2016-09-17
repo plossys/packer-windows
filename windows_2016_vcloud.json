@@ -2,6 +2,7 @@
   "builders": [
     {
       "type": "vmware-iso",
+      "vm_name": "windows_2016",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
