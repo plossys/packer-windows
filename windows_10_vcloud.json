@@ -29,6 +29,8 @@
         "./scripts/microsoft-updates.bat",
         "./scripts/win-updates.ps1",
         "./scripts/openssh.ps1",
+        "./scripts/set-powerplan.ps1",
+        "./scripts/enable-winrm.ps1",
         "./scripts/enable-winrm-after-customization.bat",
         "./scripts/enable-winrm-after-customization.xml"
       ],
@@ -43,27 +45,14 @@
   ],
   "provisioners": [
     {
-      "type": "windows-shell",
+      "type": "shell",
       "remote_path": "/tmp/script.bat",
-      "execute_command": "{{ .Vars }} cmd /c \"{{ .Path }}\"",
+      "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
       "scripts": [
         "./scripts/vm-guest-tools.bat",
         "./scripts/enable-rdp.bat"
-      ]
-    },
-    {
-      "type": "powershell",
-      "execute_command": "powershell \"& { {{.Vars}}{{.Path}}; exit $LastExitCode}\"",
-      "scripts": [
-        "./scripts/set-powerplan.ps1",
-        "./scripts/enable-winrm.ps1"
-      ]
-    },
-    {
-      "type": "windows-shell",
-      "remote_path": "/tmp/script.bat",
-      "execute_command": "{{ .Vars }} cmd /c \"{{ .Path }}\"",
-      "scripts": [
+        "./scripts/set-powerplan.bat",
+        "./scripts/enable-winrm.bat",
         "./scripts/pin-powershell.bat",
         "./scripts/rsync.bat",
         "./scripts/delay-winrm-vcloud.bat",
