@@ -11,7 +11,7 @@ describe 'box' do
   end
 
   describe command('& rsync --version') do
-      its(:stdout) { should match /rsync *version *3.1.0/ }
+      its(:stdout) { should match /rsync *version *3.1.2/ }
   end
 
   # check SSH
