@@ -52,13 +52,11 @@
       ]
     },
     {
-      "type": "windows-restart"
-    },
-    {
       "type": "powershell",
       "execute_command": "powershell \"& { {{.Vars}}{{.Path}}; exit $LastExitCode}\"",
       "scripts": [
-        "./scripts/set-powerplan.ps1"
+        "./scripts/set-powerplan.ps1",
+        "./scripts/enable-winrm.ps1"
       ]
     },
     {
@@ -68,7 +66,6 @@
       "scripts": [
         "./scripts/pin-powershell.bat",
         "./scripts/rsync.bat",
-        "./scripts/enable-winrm.bat",
         "./scripts/delay-winrm-vcloud.bat",
         "./scripts/vagrant-ssh.bat",
         "./scripts/dis-updates.bat",
