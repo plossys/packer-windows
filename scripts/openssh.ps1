@@ -5,7 +5,7 @@ param (
 Write-Host "AutoStart: $AutoStart"
 
 # setup openssh
-$ssh_download_url = "http://www.mls-software.com/files/setupssh-6.7p1-1.exe"
+$ssh_download_url = "http://www.mls-software.com/files/setupssh-7.3p1-2.exe"
 
 if (!(Test-Path "C:\Program Files\OpenSSH\bin\ssh.exe")) {
     Write-Host "Downloading $ssh_download_url"
