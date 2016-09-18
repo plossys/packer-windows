@@ -59,7 +59,7 @@
         "./scripts/delay-winrm-vcloud.bat",
         "./scripts/vagrant-ssh.bat",
         "./scripts/dis-updates.bat",
-        "./scripts/enable-rdp.bat",
+        "./scripts/set-winrm-automatic.bat",
         "./scripts/compile-dotnet-assemblies.bat"
       ]
     }
