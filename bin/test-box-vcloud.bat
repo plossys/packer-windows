@@ -116,6 +116,7 @@ echo     tst.vm.box = "%box_name%" >>Vagrantfile
 echo     tst.vm.hostname = "tst"
 echo     tst.vm.provider :vcloud do ^|vcloud, override^| >>Vagrantfile
 echo       vcloud.vapp_prefix = "%box_name%" >>Vagrantfile
+echo       vcloud.catalog_name = "%vcloud_catalog%" >>Vagrantfile
 echo       override.vm.usable_port_range = 2200..2999 >>Vagrantfile
 echo     end >>Vagrantfile
 echo     tst.vm.provision :serverspec do ^|spec^| >>Vagrantfile
