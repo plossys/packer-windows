@@ -93,9 +93,9 @@ function Install-WindowsUpdates() {
             [bool]$addThisUpdate = $false
             if ($Update.InstallationBehavior.CanRequestUserInput) {
                 LogWrite "> Skipping: $($Update.Title) because it requires user input"
-            } else if ($Update.Title.Contains("KB3188966")) {
+            } elseif ($Update.Title.Contains("KB3188966")) {
                 LogWrite "> Skipping: $($Update.Title) because it will hang forever"
-            } else if ($Update.Title.Contains("KB3189866")) {
+            } elseif ($Update.Title.Contains("KB3189866")) {
                 LogWrite "> Skipping: $($Update.Title) because it will hang forever"
             } else {
                 if (!($Update.EulaAccepted)) {
