@@ -24,6 +24,7 @@
         "{{user `autounattend`}}",
         "./floppy/WindowsPowershell.lnk",
         "./floppy/PinTo10.exe",
+        "./scripts/fixnetwork.ps1",
         "./scripts/disable-winrm.ps1",
         "./scripts/dis-updates.ps1",
         "./scripts/microsoft-updates.bat",
