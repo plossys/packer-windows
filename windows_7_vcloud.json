@@ -3,10 +3,7 @@
     {
       "type": "vmware-iso",
       "vm_name": "windows_7",
-      "iso_urls": [
-        "http://roecloudsrv001.sealsystems.local/windows/win7sp1_enterprise_en/x64/en_windows_7_enterprise_with_sp1_x64_dvd_u_677651.iso",
-        "file:///C:/ISO/Windows 7/en_windows_7_enterprise_with_sp1_x64_dvd_u_677651.iso"
-      ],
+      "iso_url": "http://roecloudsrv001.sealsystems.local/windows/win7sp1_enterprise_en/x64/en_windows_7_enterprise_with_sp1_x64_dvd_u_677651.iso",
       "iso_checksum_type": "sha1",
       "iso_checksum": "a491f985dccfb5863f31b728dddbedb2ff4df8d1",
       "headless": true,
@@ -14,7 +11,7 @@
       "skip_compaction": true,
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "ssh_wait_timeout": "24h",
+      "ssh_wait_timeout": "6h",
       "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
       "guest_os_type": "windows7-64",
       "tools_upload_flavor": "windows",
@@ -40,45 +37,6 @@
       "vmx_data_post": {
         "ethernet0.virtualDev": "vmxnet3"
       }
-    },
-    {
-      "type": "virtualbox-iso",
-      "iso_urls": [
-        "http://roecloudsrv001.sealsystems.local/windows/win7sp1_enterprise_en/x64/en_windows_7_enterprise_with_sp1_x64_dvd_u_677651.iso",
-        "file:///C:/ISO/Windows 7/en_windows_7_enterprise_with_sp1_x64_dvd_u_677651.iso"
-      ],
-      "iso_checksum_type": "sha1",
-      "iso_checksum": "a491f985dccfb5863f31b728dddbedb2ff4df8d1",
-      "headless": true,
-      "boot_wait": "2m",
-      "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
-      "ssh_wait_timeout": "16h",
-      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-      "guest_os_type": "Windows7_64",
-      "disk_size": 61440,
-      "floppy_files": [
-        "./answer_files/7/Autounattend.xml",
-        "./scripts/dis-updates.ps1",
-        "./scripts/microsoft-updates.bat",
-        "./scripts/win-updates.ps1",
-        "./scripts/openssh.ps1",
-        "./scripts/oracle-cert.cer"
-      ],
-      "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--memory",
-          "2048"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--cpus",
-          "2"
-        ]
-      ]
     }
   ],
   "provisioners": [
@@ -89,11 +47,11 @@
       "scripts": [
         "./scripts/vm-guest-tools.bat",
         "./scripts/rsync.bat",
-        "./scripts/dis-updates.bat",
-        "./scripts/enable-rdp.bat",
         "./scripts/enable-winrm.bat",
         "./scripts/delay-winrm-vcloud.bat",
-        "./scripts/vagrant-ssh.bat"
+        "./scripts/vagrant-ssh.bat",
+        "./scripts/dis-updates.bat",
+        "./scripts/enable-rdp.bat"
       ]
     },
     {
