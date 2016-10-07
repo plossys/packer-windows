@@ -1,12 +1,11 @@
 @setlocal
-@set BUILD=%1
 @set debug= 
 
 @if "%1x"=="--debugx" (
   shift
   set debug=--debug
-  set BUILD=%1
 )
+@set BUILD=%1
 
 @if "%BUILD:~-7%" == "_vmware" (
   set boxname=%BUILD:~0,-7%
