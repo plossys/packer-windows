@@ -1,10 +1,15 @@
 rem
 rem bin\test-box-vmware.bat ubuntu1204_vmware.box ubuntu1204
 set quick=0
+set debug=0
 
 if "%1x"=="--quickx" (
   shift
   set quick=1
+)
+if "%1x"=="--debugx" (
+  shift
+  set debug=1
 )
 set box_path=%1
 set box_name=%2
