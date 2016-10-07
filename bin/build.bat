@@ -1,5 +1,11 @@
 @setlocal
 @set BUILD=%1
+@set debug= 
+
+@if "%1x"=="--debugx" (
+  shift
+  set debug=--debug
+)
 
 @if "%BUILD:~-7%" == "_vmware" (
   set boxname=%BUILD:~0,-7%
@@ -46,5 +52,5 @@ packer build --only=%builder% %template%.json
 if ERRORLEVEL 1 goto :EOF
 
 if exist %~dp0\test-box-%spec%.bat (
-  call %~dp0\test-box-%spec%.bat %boxname%_%spec%.box %boxname%
+  call %~dp0\test-box-%spec%.bat %debug% %boxname%_%spec%.box %boxname%
 ) 
