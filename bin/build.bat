@@ -5,6 +5,7 @@
 @if "%1x"=="--debugx" (
   shift
   set debug=--debug
+  set BUILD=%1
 )
 
 @if "%BUILD:~-7%" == "_vmware" (
