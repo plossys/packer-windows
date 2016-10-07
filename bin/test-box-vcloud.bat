@@ -1,5 +1,6 @@
 rem
 rem bin\test-box-vcloud.bat ubuntu1204_vcloud.box ubuntu1204
+echo on
 set quick=0
 set debug=0
 
@@ -22,7 +23,7 @@ set result=0
 set tmp_path=boxtest
 if exist %tmp_path% rmdir /s /q %tmp_path%
 
-if %quick%==1 goto :do_test
+if %quick%==1 goto have_vagrantfile
 
 if exist C:\Users\vagrant\.vagrant.d\Vagrantfile goto :have_vagrantfile
 if exist C:\vagrant\resources\Vagrantfile-global (
@@ -34,12 +35,14 @@ rem tested only with box-provider=vcloud
 rem vagrant plugin install vagrant-%box_provider%
 
 rem vagrant plugin install vagrant-serverspec
+if %quick%==1 goto have_uploaded
 
 vagrant box remove %box_name% --provider=%vagrant_provider%
 vagrant box add %box_name% %box_path% -f
 if ERRORLEVEL 1 set result=%ERRORLEVEL%
 if ERRORLEVEL 1 goto :done
 
+:have_uploaded
 @set vcloud_hostname=YOUR-VCLOUD-HOSTNAME
 @set vcloud_username=YOUR-VCLOUD-USERNAME
 @set vcloud_password=YOUR-VCLOUD-PASSWORD
@@ -50,6 +53,8 @@ if ERRORLEVEL 1 goto :done
 if "%VAGRANT_HOME%x"=="x" set VAGRANT_HOME=%USERPROFILE%\.vagrant.d
 
 if exist c:\vagrant\resources\test-box-vcloud-credentials.bat call c:\vagrant\resources\test-box-vcloud-credentials.bat
+
+if %quick%==1 goto :do_test
 
 echo Uploading %box_name%.ovf to vCloud %vcloud_hostname% / %vcloud_org% / %vcloud_catalog% / %box_name%
 where /q ovftool || set PATH=%PATH%;c:\Program Files (x86)\VMware\VMware Workstation\OVFTool
@@ -82,7 +87,7 @@ if exist %USERPROFILE%\.ssh\known_hosts echo known_hosts still here!!
 vagrant up --provider=%vagrant_provider%
 if ERRORLEVEL 1 set result=%ERRORLEVEL%
 
-if %debug%==1 set VAGRANT_LOG=debug
+if %debug%==1 set VAGRANT_LOG=
 @echo Sleep 10 seconds
 @ping 1.1.1.1 -n 1 -w 10000 > nul
 
