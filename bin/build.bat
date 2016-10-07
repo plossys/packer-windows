@@ -1,5 +1,5 @@
 @setlocal
-@set debug= 
+@set debug=
 
 @if "%1x"=="--debugx" (
   shift
@@ -51,6 +51,6 @@ if exist "C:\Windows\system32\config\systemprofile\VirtualBox VMs\%template%" (
 packer build --only=%builder% %template%.json
 if ERRORLEVEL 1 goto :EOF
 
-if exist %~dp0\test-box-%spec%.bat (
-  call %~dp0\test-box-%spec%.bat %debug% %boxname%_%spec%.box %boxname%
-) 
+if exist bin\test-box-%spec%.bat (
+  call bin\test-box-%spec%.bat %debug% %boxname%_%spec%.box %boxname%
+)
