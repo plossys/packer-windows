@@ -77,7 +77,7 @@ vagrant up --provider=%vagrant_provider%
 if ERRORLEVEL 1 set result=%ERRORLEVEL%
 
 @echo Sleep 10 seconds
-@ping 1.1.1.1 -n 1 -w 10000 > nul
+@ping 127.0.0.1 -n 10 > nul
 
 vagrant destroy -f
 if ERRORLEVEL 1 set result=%ERRORLEVEL%
