@@ -49,8 +49,9 @@
   ],
   "provisioners": [
     {
-      "type": "windows-shell",
-      "execute_command": "{{ .Vars }} cmd /c \"{{ .Path }}\"",
+      "type": "shell",
+      "remote_path": "/tmp/script.bat",
+      "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
       "scripts": [
         "./scripts/vm-guest-tools.bat",
         "./scripts/pin-powershell.bat",
@@ -62,8 +63,9 @@
       "type": "windows-restart"
     },
     {
-      "type": "windows-shell",
-      "execute_command": "{{ .Vars }} cmd /c \"{{ .Path }}\"",
+      "type": "shell",
+      "remote_path": "/tmp/script.bat",
+      "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
       "scripts": [
         "./scripts/delay-winrm-vcloud.bat",
         "./scripts/docker/install-docker.bat",
