@@ -1,4 +1,10 @@
 @setlocal
+rem Usage:
+rem   bin\build.bat Jenkins job name = template name without json extension
+rem
+rem Examples:
+rem   bin\build.bat windows_2016_vcloud
+rem
 @set debug=
 
 @if "%1x"=="--debugx" (
@@ -52,5 +58,5 @@ packer build --only=%builder% %template%.json
 if ERRORLEVEL 1 goto :EOF
 
 if exist bin\test-box-%spec%.bat (
-  call bin\test-box-%spec%.bat %debug% %boxname%_%spec%.box %boxname%
+  call bin\test-box-%spec%.bat %debug% %boxname%_%spec%
 )

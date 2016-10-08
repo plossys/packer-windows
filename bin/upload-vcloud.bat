@@ -1,8 +1,11 @@
+echo on
+rem Usage:
+rem   bin\upload-vcloud.bat Jenkins job name = template name without json extension
+rem
+rem Examples:
+rem   bin\upload-vcloud.bat windows_2016_vcloud
+rem
 set BUILD=%1
-
-if "%BUILD%x"=="uploadx" (
-  set BUILD=%2
-)
 
 @if "%BUILD:~-7%" == "_vcloud" (
   set boxname=%BUILD:~0,-7%

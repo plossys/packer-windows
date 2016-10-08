@@ -1,5 +1,12 @@
+echo on
+rem Usage:
+rem   bin\test-box-virtualbox.bat Jenkins job name = template name without json extension
 rem
-rem bin\test-box-virtualbox.bat ubuntu1204_virtualbox.box ubuntu1204
+rem Examples:
+rem   bin\test-box-virtualbox.bat windows_2016_virtualbox
+rem   bin\test-box-virtualbox.bat --debug windows_2016_virtualbox
+rem   bin\test-box-virtualbox.bat --quick --debug windows_2016_virtualbox
+rem
 set quick=0
 set debug=0
 
@@ -11,10 +18,25 @@ if "%1x"=="--debugx" (
   shift
   set debug=1
 )
-set box_path=%1
-set box_name=%2
-set box_provider=virtualbox
-set vagrant_provider=virtualbox
+
+@set BUILD=%1
+
+@if "%BUILD:~-11%" == "_virtualbox" (
+  set boxname=%BUILD:~0,-11%
+  set template=%BUILD:~0,-11%
+  set spec=virtualbox
+)
+
+@if "%spec%x"=="x" (
+  echo Wrong build parameter!
+  goto :EOF
+)
+
+@echo.
+@echo boxname = %boxname%
+@echo template = %template%
+@echo spec = %spec%
+@echo.
 
 set result=0
 
@@ -25,8 +47,8 @@ if %quick%==1 goto :do_test
 
 rem vagrant plugin install vagrant-serverspec
 
-vagrant box remove %box_name% --provider=%vagrant_provider%
-vagrant box add %box_name% %box_path% -f
+vagrant box remove %boxname% --provider=%spec%
+vagrant box add %boxname% %boxname%_%spec%.box -f
 if ERRORLEVEL 1 set result=%ERRORLEVEL%
 if ERRORLEVEL 1 goto :done
 
@@ -42,7 +64,7 @@ echo USERPROFILE = %USERPROFILE%
 if exist %USERPROFILE%\.ssh\known_hosts type %USERPROFILE%\.ssh\known_hosts
 del /F %USERPROFILE%\.ssh\known_hosts
 if exist %USERPROFILE%\.ssh\known_hosts echo known_hosts still here!!
-vagrant up --provider=%vagrant_provider%
+vagrant up --provider=%spec%
 if ERRORLEVEL 1 set result=%ERRORLEVEL%
 
 @echo Sleep 10 seconds
@@ -54,7 +76,7 @@ popd
 
 if %quick%==1 goto :done
 
-vagrant box remove %box_name% --provider=%vagrant_provider%
+vagrant box remove %boxname% --provider=%spec%
 if ERRORLEVEL 1 set result=%ERRORLEVEL%
 
 goto :done
@@ -69,10 +91,10 @@ if not exist testdir\testfile.txt (
 
 echo Vagrant.configure('2') do ^|config^| >Vagrantfile
 echo   config.vm.define :"tst" do ^|tst^| >>Vagrantfile
-echo     tst.vm.box = "%box_name%" >>Vagrantfile
+echo     tst.vm.box = "%boxname%" >>Vagrantfile
 echo     tst.vm.hostname = "tst"
 echo     tst.vm.provision :serverspec do ^|spec^| >>Vagrantfile
-echo       spec.pattern = '../test/*_%box_provider%.rb' >>Vagrantfile
+echo       spec.pattern = '../test/*_%spec%.rb' >>Vagrantfile
 echo     end >>Vagrantfile
 echo   end >>Vagrantfile
 echo end >>Vagrantfile

@@ -1,5 +1,12 @@
+echo on
+rem Usage:
+rem   bin\test-box-vmware.bat Jenkins job name = template name without json extension
 rem
-rem bin\test-box-vmware.bat ubuntu1204_vmware.box ubuntu1204
+rem Examples:
+rem   bin\test-box-vmware.bat windows_2016_vmware
+rem   bin\test-box-vmware.bat --debug windows_2016_vmware
+rem   bin\test-box-vmware.bat --quick --debug windows_2016_vmware
+rem
 set quick=0
 set debug=0
 
@@ -11,15 +18,31 @@ if "%1x"=="--debugx" (
   shift
   set debug=1
 )
-set box_path=%1
-set box_name=%2
-set box_suffix=vmware
+
+@set BUILD=%1
+
+@if "%BUILD:~-7%" == "_vmware" (
+  set boxname=%BUILD:~0,-7%
+  set template=%BUILD:~0,-7%
+  set spec=vmware
+)
+
+@if "%spec%x"=="x" (
+  echo Wrong build parameter!
+  goto :EOF
+)
+
+@echo.
+@echo boxname = %boxname%
+@echo template = %template%
+@echo spec = %spec%
+@echo.
+
 set box_provider=vmware_desktop
 set vagrant_provider=vmware_workstation
 set vagrant_plugin=vagrant-vmware-workstation
 
 set result=0
-if "%VAGRANT_HOME%x"=="x" set VAGRANT_HOME=%USERPROFILE%\.vagrant.d
 
 set tmp_path=boxtest
 if exist %tmp_path% rmdir /s /q %tmp_path%
@@ -33,10 +56,12 @@ if exist c:\vagrant\resources\license.lic (
     vagrant plugin license %vagrant_plugin% c:\vagrant\resources\license.lic
   )
 )
-vagrant box remove %box_name% --provider=%box_provider%
-vagrant box add %box_name% %box_path% -f
+vagrant box remove %boxname% --provider=%box_provider%
+vagrant box add %boxname% %boxname%_%spec%.box -f
 if ERRORLEVEL 1 set result=%ERRORLEVEL%
 if ERRORLEVEL 1 goto :done
+
+if "%VAGRANT_HOME%x"=="x" set VAGRANT_HOME=%USERPROFILE%\.vagrant.d
 
 :do_test
 set result=0
@@ -60,7 +85,7 @@ popd
 
 if %quick%==1 goto :done
 
-vagrant box remove %box_name% --provider=%box_provider%
+vagrant box remove %boxname% --provider=%box_provider%
 if ERRORLEVEL 1 set result=%ERRORLEVEL%
 
 goto :done
@@ -75,10 +100,10 @@ if not exist testdir\testfile.txt (
 
 echo Vagrant.configure('2') do ^|config^| >Vagrantfile
 echo   config.vm.define :"tst" do ^|tst^| >>Vagrantfile
-echo     tst.vm.box = "%box_name%" >>Vagrantfile
+echo     tst.vm.box = "%boxname%" >>Vagrantfile
 echo     tst.vm.hostname = "tst"
 echo     tst.vm.provision :serverspec do ^|spec^| >>Vagrantfile
-echo       spec.pattern = '../test/*_%box_suffix%.rb' >>Vagrantfile
+echo       spec.pattern = '../test/*_%spec%.rb' >>Vagrantfile
 echo     end >>Vagrantfile
 echo   end >>Vagrantfile
 echo end >>Vagrantfile
