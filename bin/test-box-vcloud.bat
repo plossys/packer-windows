@@ -145,7 +145,7 @@ echo       vcloud.catalog_name = "%vcloud_catalog%" >>Vagrantfile
 echo       override.vm.usable_port_range = 2200..2999 >>Vagrantfile
 echo     end >>Vagrantfile
 echo     tst.vm.provision :serverspec do ^|spec^| >>Vagrantfile
-echo       spec.pattern = '../test/*_%spec%.rb' >>Vagrantfile
+echo       spec.pattern = '../test/{*_%spec%.rb,%boxname%.rb}' >>Vagrantfile
 echo     end >>Vagrantfile
 echo   end >>Vagrantfile
 echo end >>Vagrantfile
