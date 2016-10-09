@@ -94,7 +94,7 @@ echo   config.vm.define :"tst" do ^|tst^| >>Vagrantfile
 echo     tst.vm.box = "%boxname%" >>Vagrantfile
 echo     tst.vm.hostname = "tst"
 echo     tst.vm.provision :serverspec do ^|spec^| >>Vagrantfile
-echo       spec.pattern = '../test/*_%spec%.rb' >>Vagrantfile
+echo       spec.pattern = '../test/{*_%spec%.rb,%boxname%.rb}' >>Vagrantfile
 echo     end >>Vagrantfile
 echo   end >>Vagrantfile
 echo end >>Vagrantfile
