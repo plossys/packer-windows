@@ -40,6 +40,9 @@
         "memsize": "2048",
         "numvcpus": "2",
         "scsi0.virtualDev": "lsisas1068"
+      },
+      "vmx_data_post": {
+        "ethernet0.virtualDev": "vmxnet3"
       }
     }
   ],
