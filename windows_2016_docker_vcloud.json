@@ -13,7 +13,7 @@
       "winrm_username": "vagrant",
       "winrm_password": "vagrant",
       "winrm_timeout": "6h",
-      "shutdown_command": "powershell -Command Start-Process -FilePath powershell -ArgumentList 'a:\\shutdown-and-turn-on-firewall.ps1'",
+      "shutdown_command": "cmd /c start powershell -File a:shutdown-and-turn-on-firewall.ps1",
       "guest_os_type": "windows8srv-64",
       "disk_size": 61440,
       "vnc_port_min": 5900,
