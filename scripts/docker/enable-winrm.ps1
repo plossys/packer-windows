@@ -25,5 +25,6 @@ Stop-Service winrm
 
 netsh advfirewall firewall set rule group="Windows Remote Administration" new enable=yes
 netsh advfirewall firewall set rule name="Windows Remote Management (HTTP-In)" new enable=yes action=allow
+netsh advfirewall firewall add rule name="Port 5985" dir=in action=allow protocol=TCP localport=5985
 
 Restart-Computer
