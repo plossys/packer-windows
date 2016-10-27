@@ -57,7 +57,7 @@ rem vagrant plugin install vagrant-%spec%
 rem vagrant plugin install vagrant-serverspec
 if %quick%==1 goto have_uploaded
 
-vagrant box remove %boxname% --provider=%spec%
+vagrant box remove -f %boxname% --provider=%spec%
 vagrant box add %boxname% %boxname%_%spec%.box -f
 if ERRORLEVEL 1 set result=%ERRORLEVEL%
 if ERRORLEVEL 1 goto :done
@@ -118,7 +118,7 @@ popd
 if %quick%==1 goto :done
 
 if %debug%==1 set VAGRANT_LOG=debug
-vagrant box remove %boxname% --provider=%spec%
+vagrant box remove -f %boxname% --provider=%spec%
 if ERRORLEVEL 1 set result=%ERRORLEVEL%
 
 goto :done
