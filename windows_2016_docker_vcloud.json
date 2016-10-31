@@ -7,7 +7,7 @@
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
-      "headless": true,
+      "headless": false,
       "boot_wait": "2m",
       "skip_compaction": true,
       "winrm_username": "vagrant",
@@ -20,7 +20,7 @@
       "vnc_port_max": 5980,
       "version": 10,
       "floppy_files": [
-        "./answer_files/2016/Autounattend.xml",
+        "{{user `autounattend`}}",
         "./floppy/WindowsPowershell.lnk",
         "./floppy/PinTo10.exe",
         "./scripts/disable-winrm.ps1",
@@ -68,6 +68,7 @@
       "scripts": [
         "./scripts/openssh.ps1",
         "./scripts/docker/add-docker-group.ps1",
+        "./scripts/dis-updates.ps1",
         "./scripts/docker/disable-windows-defender.ps1",
         "./scripts/docker/install-docker.ps1",
         "./scripts/docker/open-docker-insecure-port.ps1",
