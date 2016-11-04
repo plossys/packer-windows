@@ -1,0 +1,72 @@
+{
+  "builders": [
+    {
+      "type": "vmware-iso",
+      "vm_name": "windows_81x86",
+      "iso_url": "http://roecloudsrv001.sealsystems.local/windows/win81_enterprise_en/SW_DVD9_SA_Win_Ent_8.1_32BIT_English_-3_MLF_X19-84066.ISO",
+      "iso_checksum_type": "sha1",
+      "iso_checksum": "584a9ad7e2bb3d7e189adcfba44a497cc9155937",
+      "headless": true,
+      "boot_wait": "2m",
+      "skip_compaction": true,
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_wait_timeout": "4h",
+      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+      "guest_os_type": "windows81-x86",
+      "tools_upload_flavor": "windows",
+      "disk_size": 61440,
+      "vnc_port_min": 5900,
+      "vnc_port_max": 5980,
+      "floppy_files": [
+        "./answer_files/81/Autounattend.xml",
+        "./scripts/dis-updates.ps1",
+        "./scripts/microsoft-updates.bat",
+        "./scripts/win-updates.ps1",
+        "./scripts/openssh.ps1",
+        "./scripts/enable-winrm-after-customization.bat",
+        "./scripts/enable-winrm-after-customization.xml"
+      ],
+      "vmx_data": {
+        "RemoteDisplay.vnc.enabled": "false",
+        "RemoteDisplay.vnc.port": "5900",
+        "memsize": "2048",
+        "numvcpus": "2",
+        "scsi0.virtualDev": "lsisas1068"
+      },
+      "vmx_data_post": {
+        "ethernet0.virtualDev": "vmxnet3"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "remote_path": "/tmp/script.bat",
+      "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
+      "scripts": [
+        "./scripts/vm-guest-tools.bat",
+        "./scripts/rsync.bat",
+        "./scripts/dis-updates.bat",
+        "./scripts/enable-rdp.bat",
+        "./scripts/enable-winrm.bat",
+        "./scripts/delay-winrm-vcloud.bat",
+        "./scripts/vagrant-ssh.bat"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "rm -rf /tmp/*"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant-vmware-ovf",
+      "provider": "vcloud",
+      "output": "windows_81x86_{{.Provider}}.box",
+      "vagrantfile_template": "vagrantfile-windows_81.template"
+    }
+  ]
+}
