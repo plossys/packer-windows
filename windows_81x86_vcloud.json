@@ -19,7 +19,7 @@
       "vnc_port_min": 5900,
       "vnc_port_max": 5980,
       "floppy_files": [
-        "./answer_files/81/Autounattend.xml",
+        "./answer_files/81x86/Autounattend.xml",
         "./scripts/dis-updates.ps1",
         "./scripts/microsoft-updates.bat",
         "./scripts/win-updates.ps1",
