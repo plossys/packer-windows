@@ -24,6 +24,7 @@
         "./floppy/WindowsPowershell.lnk",
         "./floppy/PinTo10.exe",
         "./scripts/fixnetwork.ps1",
+        "./scripts/debloat-windows.ps1",
         "./scripts/disable-winrm.ps1",
         "./scripts/dis-updates.ps1",
         "./scripts/microsoft-updates.bat",
@@ -53,6 +54,17 @@
       "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
       "scripts": [
         "./scripts/vm-guest-tools.bat",
+        "./scripts/debloat-windows.bat"
+      ]
+    },
+    {
+      "type": "windows-restart"
+    },
+    {
+      "type": "shell",
+      "remote_path": "/tmp/script.bat",
+      "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
+      "scripts": [
         "./scripts/enable-rdp.bat",
         "./scripts/set-powerplan.bat",
         "./scripts/enable-winrm.bat",
