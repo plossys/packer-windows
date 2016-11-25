@@ -6,7 +6,7 @@
       "iso_url": "http://roecloudsrv001.sealsystems.local/windows/win81_enterprise_en/SW_DVD9_SA_Win_Ent_8.1_32BIT_English_-3_MLF_X19-84066.ISO",
       "iso_checksum_type": "sha1",
       "iso_checksum": "584a9ad7e2bb3d7e189adcfba44a497cc9155937",
-      "headless": false,
+      "headless": true,
       "boot_wait": "2m",
       "skip_compaction": true,
       "ssh_username": "vagrant",
