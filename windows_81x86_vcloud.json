@@ -6,7 +6,7 @@
       "iso_url": "http://roecloudsrv001.sealsystems.local/windows/win81_enterprise_en/SW_DVD9_SA_Win_Ent_8.1_32BIT_English_-3_MLF_X19-84066.ISO",
       "iso_checksum_type": "sha1",
       "iso_checksum": "584a9ad7e2bb3d7e189adcfba44a497cc9155937",
-      "headless": true,
+      "headless": false,
       "boot_wait": "2m",
       "skip_compaction": true,
       "ssh_username": "vagrant",
@@ -20,10 +20,11 @@
       "vnc_port_max": 5980,
       "floppy_files": [
         "./answer_files/81x86/Autounattend.xml",
+        "./floppy/cygpopt-0.dll",
         "./scripts/dis-updates.ps1",
         "./scripts/microsoft-updates.bat",
         "./scripts/win-updates.ps1",
-        "./scripts/openssh.ps1",
+        "./scripts/opensshx86.ps1",
         "./scripts/enable-winrm-after-customization.bat",
         "./scripts/enable-winrm-after-customization.xml"
       ],
@@ -45,8 +46,8 @@
       "remote_path": "/tmp/script.bat",
       "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
       "scripts": [
-        "./scripts/vm-guest-tools.bat",
-        "./scripts/rsync.bat",
+        "./scripts/vm-guest-toolsx86.bat",
+        "./scripts/rsyncx86.bat",
         "./scripts/dis-updates.bat",
         "./scripts/enable-rdp.bat",
         "./scripts/enable-winrm.bat",
@@ -66,7 +67,7 @@
       "type": "vagrant-vmware-ovf",
       "provider": "vcloud",
       "output": "windows_81x86_{{.Provider}}.box",
-      "vagrantfile_template": "vagrantfile-windows_81.template"
+      "vagrantfile_template": "vagrantfile-windows_81x86.template"
     }
   ]
 }
