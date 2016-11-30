@@ -4,8 +4,8 @@ param (
 
 Write-Host "AutoStart: $AutoStart"
 
-# setup openssh
-if (Test-Path $env:ProgramFiles(x86)) {
+# install openssh
+if ([IntPtr]::Size -eq 8) {
   $ssh_download_url = "http://www.mls-software.com/files/setupssh-7.3p1-2.exe"
 } else {
   $ssh_download_url = "http://www.mls-software.com/files/setupssh-7.2p2-1-v1.exe"
