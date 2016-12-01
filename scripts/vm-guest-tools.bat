@@ -18,7 +18,7 @@ if not exist "%SEVENZIP_PATH%" (
 msiexec /qb /i "%SEVENZIP_PATH%"
 @if errorlevel 1 echo ==^> WARNING: Error %ERRORLEVEL% was returned by: msiexec /qb /i "%SEVENZIP_PATH%"
 set SEVENZIP_EXE="%ProgramFiles%\7-Zip\7z.exe"
-if not exist "%SEVENZIP_EXE%" echo ==^> ERROR: Failed to install "%SEVENZIP_PATH%" & goto EOF
+if not exist "%SEVENZIP_EXE%" echo ==^> ERROR: Failed to install "%SEVENZIP_PATH%" & goto done
 
 :install_vm-guest-tools
 if "%PACKER_BUILDER_TYPE%" equ "parallels-iso" goto :parallels
