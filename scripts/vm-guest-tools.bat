@@ -34,7 +34,7 @@ rem don't move, actual we need VMWare-tools 10.0.9 or greater for the vCloud
 rem if exist "C:\Users\vagrant\windows.iso" (
 rem    move /Y C:\Users\vagrant\windows.iso C:\Windows\Temp
 rem )
-set VMWARE_TOOLS_URL=https://packages.vmware.com/tools/releases/10.1.0/windows/x64/VMware-tools-windows-10.1.0-4449150.iso
+set VMWARE_TOOLS_URL=https://packages.vmware.com/tools/releases/10.1.0/windows/VMware-tools-windows-10.1.0-4449150.iso
 set VMWARE_TOOLS_DIR=C:\Windows\Temp\vmware
 set VMWARE_TOOLS_ISO=%VMWARE_TOOLS_DIR%\windows.iso
 set VMWARE_TOOLS_SETUP=%VMWARE_TOOLS_DIR%\setup.exe
