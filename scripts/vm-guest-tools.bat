@@ -45,8 +45,8 @@ if not exist "%VMWARE_TOOLS_ISO%" (
 rem    cmd /c rmdir /s /q "C:\Program Files\VMWare"
 )
 
-cmd /c %SEVENZIP_EXE% x %VMWARE_TOOLS_ISO% -o%VMWARE_TOOLS_DIR%
-@if errorlevel 1 echo ==^> WARNING: Error %ERRORLEVEL% was returned by: cmd /c ""%SEVENZIP_EXE%" x "%VMWARE_TOOLS_ISO%" -o%VMWARE_TOOLS_DIR%"
+cmd /c "%SEVENZIP_EXE%" x %VMWARE_TOOLS_ISO% -o%VMWARE_TOOLS_DIR%
+@if errorlevel 1 echo ==^> WARNING: Error %ERRORLEVEL% was returned by: cmd /c "%SEVENZIP_EXE%" x %VMWARE_TOOLS_ISO% -o%VMWARE_TOOLS_DIR%
 @if not exist "%VMWARE_TOOLS_SETUP%" echo ==^> Unable to unzip "%VMWARE_TOOLS_ISO%" & goto done
 cmd /c %VMWARE_TOOLS_SETUP% /S /v"/qn REBOOT=R\"
 @if errorlevel 1 echo ==^> WARNING: Error %ERRORLEVEL% was returned by: "%VMWARE_TOOLS_SETUP%" /S /v "/qn REBOOT=R\"
