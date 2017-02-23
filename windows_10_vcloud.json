@@ -2,7 +2,7 @@
   "builders": [
     {
       "type": "vmware-iso",
-      "vm_name": "windows_10",
+      "vm_name": "{{user `vm_name`}}",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
@@ -18,7 +18,7 @@
       "disk_size": "{{user `disk_size`}}",
       "vnc_port_min": 5900,
       "vnc_port_max": 5980,
-      "version": 10,
+      "version": 11,
       "floppy_files": [
         "{{user `autounattend`}}",
         "./floppy/WindowsPowershell.lnk",
@@ -82,7 +82,7 @@
     {
       "type": "vagrant-vmware-ovf",
       "provider": "vcloud",
-      "output": "windows_10_{{.Provider}}.box",
+      "output": "{{user `vm_name`}}_{{.Provider}}.box",
       "vagrantfile_template": "vagrantfile-windows_10.template"
     }
   ],
@@ -91,6 +91,7 @@
     "iso_checksum_type": "sha1",
     "iso_checksum": "9587bb5684fd871a41d810850b235dd34fe33f8d",
     "autounattend": "./answer_files/10/Autounattend.xml",
+    "vm_name": "windows_10",
     "disk_size": "61440"
   }
 }
