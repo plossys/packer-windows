@@ -58,9 +58,9 @@ describe 'box' do
     it { should be_installed  }
   #  it { should be_running  }
   end
-  describe windows_registry_key('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update') do
-    it { should have_property_value('AUOptions', :type_dword, '1') }
-  end
+  # describe windows_registry_key('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update') do
+  #   it { should have_property_value('AUOptions', :type_dword, '1') }
+  # end
 
   # check time zone
   describe command('& tzutil /g') do
