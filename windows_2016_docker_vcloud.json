@@ -29,6 +29,7 @@
         "./scripts/microsoft-updates.bat",
         "./scripts/docker/win-updates.ps1",
         "./scripts/docker/enable-winrm.ps1",
+        "./scripts/docker/2016/install-containers-feature.ps1",
         "./scripts/docker/shutdown-and-turn-on-firewall.ps1",
         "./scripts/enable-winrm-after-customization.bat",
         "./scripts/enable-winrm-after-customization.xml"
@@ -72,7 +73,7 @@
         "./scripts/docker/add-docker-group.ps1",
         "./scripts/dis-updates.ps1",
         "./scripts/docker/disable-windows-defender.ps1",
-        "./scripts/docker/install-docker.ps1",
+        "./scripts/docker/2016/install-docker.ps1",
         "./scripts/docker/docker-pull-async.ps1",
         "./scripts/docker/open-docker-insecure-port.ps1",
         "./scripts/docker/remove-docker-key-json.ps1"

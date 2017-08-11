@@ -7,17 +7,9 @@ winrm set winrm/config/service '@{AllowUnencrypted="true"}'
 winrm set winrm/config/service/auth '@{Basic="true"}'
 winrm set winrm/config/client/auth '@{Basic="true"}'
 winrm set winrm/config/listener?Address=*+Transport=HTTP '@{Port="5985"}'
-# Set-Service winrm -startuptype "auto"
-# Restart-Service winrm
 
-Write-Host "Install Containers"
-Install-WindowsFeature -Name Containers
-
-if ((GWMI Win32_Processor).VirtualizationFirmwareEnabled[0] -and (GWMI Win32_Processor).SecondLevelAddressTranslationExtensions[0]) {
-  Write-Host "Install Hyper-V"
-  Install-WindowsFeature -Name Hyper-V -IncludeManagementTools
-} else {
-  Write-Host "Skipping installation of Hyper-V"
+if (Test-Path A:\install-containers-feature.ps1) {
+  . A:\install-containers-feature.ps1
 }
 
 Stop-Service winrm
@@ -25,6 +17,5 @@ Stop-Service winrm
 
 netsh advfirewall firewall set rule group="Windows Remote Administration" new enable=yes
 netsh advfirewall firewall set rule name="Windows Remote Management (HTTP-In)" new enable=yes action=allow
-netsh advfirewall firewall add rule name="Port 5985" dir=in action=allow protocol=TCP localport=5985
 
 Restart-Computer
